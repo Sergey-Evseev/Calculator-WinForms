@@ -45,6 +45,10 @@ namespace Calculator_WinForms
             operationPerformed = button.Text; //в строковую переменную передаем название кнопок действия
             resultValue = Double.Parse(textBox_Result.Text); //в переменную для хранения
             //результата передаем текст бокса приведенный к даблу
+
+            //в лейбл текущей операции передаем строку с текущим результатом и действием
+            labelCurrentOperation.Text = resultValue + " " + operationPerformed;
+
             isOperationPerformed = true;
         }
         //clear entry (CE) очищает текст бокса
@@ -79,6 +83,11 @@ namespace Calculator_WinForms
                 default:
                     break;
             }    
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
