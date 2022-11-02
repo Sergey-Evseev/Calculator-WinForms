@@ -16,6 +16,10 @@ namespace Calculator_WinForms
         Double resultValue = 0;
         String operationPerformed = "";
 
+        //значение меняется на true при каждом нажатии кнопок действия
+        //и на false при нажатии цифровых кнопок
+        bool isOperationPerformed = false;
+
         
         public Form1()
         {
@@ -29,7 +33,7 @@ namespace Calculator_WinForms
             {
                 textBox_Result.Clear();
             };
-
+            isOperationPerformed = false;
             Button button = (Button)sender; //кастуем объект sender к классу Button
             textBox_Result.Text = textBox_Result.Text + button.Text; //передаем в бокс имя кнопки
         }
@@ -41,6 +45,7 @@ namespace Calculator_WinForms
             operationPerformed = button.Text; //в строковую переменную передаем название кнопок действия
             resultValue = Double.Parse(textBox_Result.Text); //в переменную для хранения
             //результата передаем текст бокса приведенный к даблу
+            isOperationPerformed = true;
         }
         //clear entry (CE) очищает текст бокса
         private void button5_Click(object sender, EventArgs e)
@@ -54,9 +59,26 @@ namespace Calculator_WinForms
             resultValue = 0;
         }
 
+        //обработчик нажатия на кнопку равно
         private void button16_Click(object sender, EventArgs e)
         {
-
+            switch (operationPerformed) //свич по строковой переменной хранящей действие
+            {
+                case "+": 
+                    textBox_Result.Text = (resultValue + Double.Parse(textBox_Result.Text)).ToString();
+                    break;
+                case "-":
+                    textBox_Result.Text = (resultValue - Double.Parse(textBox_Result.Text)).ToString();
+                    break;
+                case "*":
+                    textBox_Result.Text = (resultValue * Double.Parse(textBox_Result.Text)).ToString();
+                    break;
+                case "/":
+                    textBox_Result.Text = (resultValue / Double.Parse(textBox_Result.Text)).ToString();
+                    break;
+                default:
+                    break;
+            }    
         }
     }
 }
