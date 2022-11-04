@@ -264,7 +264,7 @@
             this.labelCurrentOperation.AutoSize = true;
             this.labelCurrentOperation.BackColor = System.Drawing.SystemColors.Window;
             this.labelCurrentOperation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCurrentOperation.Location = new System.Drawing.Point(24, 9);
+            this.labelCurrentOperation.Location = new System.Drawing.Point(18, 9);
             this.labelCurrentOperation.Name = "labelCurrentOperation";
             this.labelCurrentOperation.Size = new System.Drawing.Size(0, 20);
             this.labelCurrentOperation.TabIndex = 21;

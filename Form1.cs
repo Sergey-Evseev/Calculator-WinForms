@@ -26,7 +26,7 @@ namespace Calculator_WinForms
             InitializeComponent();
         }
 
-        //по нажатии кнопки изменяем текст в текст-боксе
+        //при нажатии цифр. кнопки изменяем текст в текст-боксе
         private void button_click(object sender, EventArgs e)
         {   //если до нажатия цифр. кнопки в боксе 0 либо введена операция то очищаем поле
             if ((textBox_Result.Text == "0") || (isOperationPerformed))
@@ -35,6 +35,15 @@ namespace Calculator_WinForms
             };
             isOperationPerformed = false; //после нажатия цифровых кнопок переменная меняется на false 
             Button button = (Button)sender; //кастуем объект sender к классу Button
+
+            //проверка на двойную запятую
+            if (button.Text == ",") //если с нажатием приходит запятая
+            {
+                //если текст бокс не содержит запятую
+                if (!textBox_Result.Text.Contains(","))
+                    textBox_Result.Text = textBox_Result.Text + button.Text;
+            } 
+            else 
             textBox_Result.Text = textBox_Result.Text + button.Text; //передаем в бокс имя кнопки
         }
 
