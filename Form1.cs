@@ -28,12 +28,12 @@ namespace Calculator_WinForms
 
         //по нажатии кнопки изменяем текст в текст-боксе
         private void button_click(object sender, EventArgs e)
-        {   //если до нажатия кнопки в боксе 0 убираем его
-            if (textBox_Result.Text == "0")
+        {   //если до нажатия цифр. кнопки в боксе 0 либо введена операция то очищаем поле
+            if ((textBox_Result.Text == "0") || (isOperationPerformed))
             {
                 textBox_Result.Clear();
             };
-            isOperationPerformed = false;
+            isOperationPerformed = false; //после нажатия цифровых кнопок переменная меняется на false 
             Button button = (Button)sender; //кастуем объект sender к классу Button
             textBox_Result.Text = textBox_Result.Text + button.Text; //передаем в бокс имя кнопки
         }
@@ -47,9 +47,10 @@ namespace Calculator_WinForms
             //результата передаем текст бокса приведенный к даблу
 
             //в лейбл текущей операции передаем строку с текущим результатом и действием
+            //здесь конкатенация дабл resultValue и строки operationPerformed
             labelCurrentOperation.Text = resultValue + " " + operationPerformed;
 
-            isOperationPerformed = true;
+            isOperationPerformed = true; //после нажатия кнопок действия переменная становится true 
         }
         //clear entry (CE) очищает текст бокса
         private void button5_Click(object sender, EventArgs e)
