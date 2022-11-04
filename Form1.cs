@@ -28,13 +28,17 @@ namespace Calculator_WinForms
 
         //при нажатии цифр. кнопки изменяем текст в текст-боксе
         private void button_click(object sender, EventArgs e)
-        {   //если до нажатия цифр. кнопки в боксе 0 либо введена операция то очищаем поле
-            if ((textBox_Result.Text == "0") || (isOperationPerformed))
+        {
+            Button button = (Button)sender; //кастуем объект sender к классу Button
+            
+            //если до нажатия цифр. кнопки в боксе стоит 0 при условии что с нажатием приходит не запятая,
+            //либо введена операция, то очищаем поле
+            if (  ((textBox_Result.Text == "0") && (button.Text != ",")) || (isOperationPerformed))
             {
                 textBox_Result.Clear();
             };
             isOperationPerformed = false; //после нажатия цифровых кнопок переменная меняется на false 
-            Button button = (Button)sender; //кастуем объект sender к классу Button
+            
 
             //проверка на двойную запятую
             if (button.Text == ",") //если с нажатием приходит запятая
@@ -51,15 +55,24 @@ namespace Calculator_WinForms
         private void operator_click(object sender, EventArgs e)
         {
             Button button = (Button)sender; //кастуем объект sender к классу Button
-            operationPerformed = button.Text; //в строковую переменную передаем название кнопок действия
-            resultValue = Double.Parse(textBox_Result.Text); //в переменную для хранения
-            //результата передаем текст бокса приведенный к даблу
 
-            //в лейбл текущей операции передаем строку с текущим результатом и действием
-            //здесь конкатенация дабл resultValue и строки operationPerformed
-            labelCurrentOperation.Text = resultValue + " " + operationPerformed;
-
-            isOperationPerformed = true; //после нажатия кнопок действия переменная становится true 
+            if (resultValue != 0)
+            {
+                button16.PerformClick();
+                operationPerformed = button.Text; //в строковую переменную передаем название кнопок действия
+                //в лейбл текущей операции передаем строку с текущим результатом и действием
+                //здесь конкатенация дабл resultValue и строки operationPerformed
+                labelCurrentOperation.Text = resultValue + " " + operationPerformed;
+                isOperationPerformed = true; //после нажатия кнопок действия переменная становится true 
+            }
+            else
+            {
+                operationPerformed = button.Text; 
+                resultValue = Double.Parse(textBox_Result.Text); //в переменную для хранения
+                                                                 //результата передаем текст бокса приведенный к даблу                                                                                 
+                labelCurrentOperation.Text = resultValue + " " + operationPerformed;
+                isOperationPerformed = true; 
+            }
         }
         //clear entry (CE) очищает текст бокса
         private void button5_Click(object sender, EventArgs e)
@@ -78,7 +91,8 @@ namespace Calculator_WinForms
         {
             switch (operationPerformed) //свич по строковой переменной хранящей действие
             {
-                case "+": 
+                case "+":  //дабл переменную значения складываем с приведенным к дабл текстом бокса
+                           //и все приводим к строке
                     textBox_Result.Text = (resultValue + Double.Parse(textBox_Result.Text)).ToString();
                     break;
                 case "-":
@@ -92,7 +106,9 @@ namespace Calculator_WinForms
                     break;
                 default:
                     break;
-            }    
+            }
+            resultValue = Double.Parse(textBox_Result.Text);
+            labelCurrentOperation.Text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
