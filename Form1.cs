@@ -21,7 +21,10 @@ namespace Calculator_WinForms
         //и на false при нажатии цифровых кнопок
         bool isOperationPerformed = false;
 
-        
+        //==================== переменная для хранения первоначальных размеров кнопок
+        private Rectangle buttonOriginalRectangle;
+        private Rectangle originalFormSize;
+        //====================
         
         public Form1()
         {
@@ -128,6 +131,28 @@ namespace Calculator_WinForms
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+            //первоначальные размеры формы и кнопок
+            originalFormSize = new Rectangle(this.Location.X, this.Location.Y, this.Size.Width, this.Size.Height);
+            buttonOriginalRectangle = new Rectangle(button1.Location.X, button1.Location.Y, button1.Width, button1.Height);                 
+        }
+
+        //метод вычисления новых координат и размеров
+        private void resizeControl(Rectangle r, Control c)
+        {
+            float xRatio = (float)(this.Width) / (float)(originalFormSize.Width);
+            float yRatio = (float)(this.Height) / (float)(originalFormSize.Height);
+
+            int newX = (int)(r.Width * xRatio);
+            int newY = (int)(r.Height * yRatio);
+
+            int newWidth = (int)(r.Width * xRatio);
+            int newHeight = (int)(r.Height * xRatio);
+        }
+        
+        
+        //обработчик изменения формы
+        private void Form1_Resize(object sender, EventArgs e)
         {
 
         }
