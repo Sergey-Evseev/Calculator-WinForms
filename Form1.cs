@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Calculator_WinForms
 {
@@ -85,6 +86,17 @@ namespace Calculator_WinForms
             textBox_Result.Text = "0";
             resultValue = 0;
         }
+        private void backSpace_Click(object sender, EventArgs e)
+        {
+            if (textBox_Result.TextLength > 0)
+            {
+                textBox_Result.Text = textBox_Result.Text.Substring(0, (textBox_Result.TextLength - 1));
+            }
+            else
+            {
+                textBox_Result.Text = "0";
+            }
+        }
 
         //обработчик нажатия на кнопку равно
         private void button16_Click(object sender, EventArgs e)
@@ -114,6 +126,6 @@ namespace Calculator_WinForms
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
+        }        
     }
 }
