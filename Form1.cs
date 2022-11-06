@@ -22,15 +22,17 @@ namespace Calculator_WinForms
         bool isOperationPerformed = false;
 
         
+        
         public Form1()
         {
-            InitializeComponent();
-        }
+            InitializeComponent();            
+        }       
+        
 
         //при нажатии цифр. кнопки изменяем текст в текст-боксе
         private void button_click(object sender, EventArgs e)
         {
-            Button button = (Button)sender; //кастуем объект sender к классу Button
+            System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender; //кастуем объект sender к классу Button
             
             //если до нажатия цифр. кнопки в боксе стоит 0 при условии что с нажатием приходит не запятая,
             //либо введена операция, то очищаем поле
@@ -55,7 +57,7 @@ namespace Calculator_WinForms
         //обработчик нажатий на кнопки действия
         private void operator_click(object sender, EventArgs e)
         {
-            Button button = (Button)sender; //кастуем объект sender к классу Button
+            System.Windows.Forms.Button button = (System.Windows.Forms.Button)sender; //кастуем объект sender к классу Button
 
             if (resultValue != 0)
             {
@@ -86,6 +88,8 @@ namespace Calculator_WinForms
             textBox_Result.Text = "0";
             resultValue = 0;
         }
+        
+        //присваивает текстовому полю подстроку длиной -1
         private void backSpace_Click(object sender, EventArgs e)
         {
             if (textBox_Result.TextLength > 0)
@@ -98,7 +102,7 @@ namespace Calculator_WinForms
             }
         }
 
-        //обработчик нажатия на кнопку равно
+        //обработчик нажатия на кнопку "равно"
         private void button16_Click(object sender, EventArgs e)
         {
             switch (operationPerformed) //свич по строковой переменной хранящей действие
@@ -126,6 +130,6 @@ namespace Calculator_WinForms
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }        
+        }
     }
 }
